@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	groupie_tracker "groupie_tracker/handlers"
+	groupie_tracker "groupie-tracker/handlers"
 
 	"net/http"
 )

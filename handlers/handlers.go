@@ -3,7 +3,7 @@ package groupie_tracker
 import (
 	"encoding/json"
 	"fmt"
-	groupie_tracker "groupie_tracker/utils"
+	groupie_tracker "groupie-tracker/utils"
 	"html/template"
 	"net/http"
 )
