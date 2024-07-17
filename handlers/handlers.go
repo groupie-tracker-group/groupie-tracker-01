@@ -8,7 +8,16 @@ import (
 	"net/http"
 )
 
-type Artist struct {
+// THE ARTIST STRUCT WILL HOLD THE DATA OF THE ARTIST
+var (
+	API = "https://groupietrackers.herokuapp.com/api"
+	// RelationsApi = "https://groupietrackers.herokuapp.com/api/relation"
+	// DatesApi = "https://groupietrackers.herokuapp.com/api/dates"
+	// LocationsApi = "https://groupietrackers.herokuapp.com/api/locations"
+
+)
+
+type artistData struct {
 	ID           int      `json:"id"`
 	Name         string   `json:"name"`
 	Image        string   `json:"image"`
@@ -20,60 +29,152 @@ type Artist struct {
 	Locations    string   `json:"locations"`
 }
 
-// that will huandle the /artists , will pass the data cards to the front end
+type DatesLocations struct {
+	ID             int                 `json:"id"`
+	DatesLocations map[string][]string `json:"datesLocations"`
+}
+
+type Locations struct {
+	ID        int      `json:"id"`
+	LocationS []string `json:"Locations"`
+	Dates     string   `json:"dates"`
+}
+
+type ConcertDates struct {
+	ID    int      `json:"id"`
+	Dates []string `json:"dates"`
+}
+
+// THE NEWDETAILS STRUCT WILL HOLD THE DATA OF THE ARTIST
+type NewDetails struct {
+	ArtistData artistData
+	Dates      ConcertDates
+	Locations  Locations
+	Relations  DatesLocations
+}
+
+// THIS FUNCTION WILL HANDLE THE REQUEST TO THE HOME PAGE
 func HandleArtistsPage(w http.ResponseWriter, r *http.Request) {
+	// get the data from the api
 	jsonData, err := http.Get(groupie_tracker.API + "/artists")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	var artists []Artist
-	if err := json.NewDecoder(jsonData.Body).Decode(&artists); err != nil {
+	// decode the data into the artist struct
+	var artistsData []*artistData
+	if err := json.NewDecoder(jsonData.Body).Decode(&artistsData); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+	// parse the template
 	tmpl, err := template.ParseFiles("./web/templates/Home.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
-	err = tmpl.Execute(w, artists)
+	// execute the template and pass the data to the front end
+	err = tmpl.Execute(w, artistsData)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
 }
 
+// THIS FUNCTION WILL GET THE ID FROM THE URL
 func getIdFromURL(r *http.Request) string {
 	id := r.URL.Query().Get("id")
-	fmt.Println(id)
 	return id
 }
 
+func GetData(category string, Id string) (*http.Response, error) {
+	// THE GET FUNCTION WILL MAKE A GET REQUEST TO THE API AND RETURN THE RESPONSE
+	data, err := http.Get(groupie_tracker.API + "/" + category + "/" + Id)
+	if err != nil {
+		return nil, fmt.Errorf("error fetching %s: %v", API+"/"+category, err)
+	}
+
+	return data, nil
+}
+
+// THIS FUNCTION WILL HANDLE THE REQUEST TO THE DETAILS PAGE
 func HandleDetailesPage(w http.ResponseWriter, r *http.Request) {
+	// get the id from the url
 	id := getIdFromURL(r)
-	jsonData, err := http.Get(groupie_tracker.API + "/artists/" + id)
+
+	// // get artist relations dates data from the api
+	relationsData, err := GetData("relation", id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	var artist Artist
-	if err := json.NewDecoder(jsonData.Body).Decode(&artist); err != nil {
+	var relations *DatesLocations
+	if err := json.NewDecoder(relationsData.Body).Decode(&relations); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	// fmt.Println(relations)
+
+	// get artist concert dates data from the api
+	concertDatesData, err := GetData("dates", id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	var concertDates *ConcertDates
+	if err := json.NewDecoder(concertDatesData.Body).Decode(&concertDates); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// fmt.Println("DATES", concertDates)
+
+	// get artist locations data from the api
+	locationsData, err := GetData("locations", id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	var locations *Locations
+	if err := json.NewDecoder(locationsData.Body).Decode(&locations); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	// fmt.Println("locations: ", locations)
+
+	jsonData, err := GetData("artists", id)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	var Detailesdata *NewDetails
+	if err := json.NewDecoder(jsonData.Body).Decode(&Detailesdata); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// fmt.Println("Detailes data: ", )
+
+	// var artistData *artistData
+	// if err := json.NewDecoder(jsonData.Body).Decode(&artistData); err != nil {
+	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
+	// 	return
+
+	// }
+
+	// parse the template and pass the data to the front end
 	tmpl, err := template.ParseFiles("./web/templates/Details.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	err = tmpl.Execute(w, artist)
+	fmt.Println("Detailesdata", Detailesdata)
+	// execute the template and pass the data to the front end
+	err = tmpl.Execute(w, Detailesdata)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 }
-
-// that func will handle the Artist details page
