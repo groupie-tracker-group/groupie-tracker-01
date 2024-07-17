@@ -48,7 +48,7 @@ type ConcertDates struct {
 // THE NEWDETAILS STRUCT WILL HOLD THE DATA OF THE ARTIST
 type NewDetails struct {
 	ArtistData artistData
-	Dates      ConcertDates
+	Dates      ConcertDates 
 	Locations  Locations
 	Relations  DatesLocations
 }
@@ -101,15 +101,14 @@ func GetData(category string, Id string) (*http.Response, error) {
 func HandleDetailesPage(w http.ResponseWriter, r *http.Request) {
 	// get the id from the url
 	id := getIdFromURL(r)
-
+	var NewDetails NewDetails
 	// // get artist relations dates data from the api
 	relationsData, err := GetData("relation", id)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	var relations *DatesLocations
-	if err := json.NewDecoder(relationsData.Body).Decode(&relations); err != nil {
+	if err := json.NewDecoder(relationsData.Body).Decode(&NewDetails.Relations); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -122,8 +121,7 @@ func HandleDetailesPage(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	var concertDates *ConcertDates
-	if err := json.NewDecoder(concertDatesData.Body).Decode(&concertDates); err != nil {
+	if err := json.NewDecoder(concertDatesData.Body).Decode(&NewDetails.Dates); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -133,36 +131,26 @@ func HandleDetailesPage(w http.ResponseWriter, r *http.Request) {
 	// get artist locations data from the api
 	locationsData, err := GetData("locations", id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, "hna4", http.StatusInternalServerError)
 		return
 	}
-	var locations *Locations
-	if err := json.NewDecoder(locationsData.Body).Decode(&locations); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+	if err := json.NewDecoder(locationsData.Body).Decode(&NewDetails.Locations); err != nil {
+		http.Error(w, "hna3", http.StatusInternalServerError)
 		return
 	}
 	// fmt.Println("locations: ", locations)
 
 	jsonData, err := GetData("artists", id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, "hna2", http.StatusInternalServerError)
+		return
+	}
+	if err := json.NewDecoder(jsonData.Body).Decode(&NewDetails.ArtistData); err != nil {
+		http.Error(w, "hna1", http.StatusInternalServerError)
 		return
 	}
 
-	var Detailesdata *NewDetails
-	if err := json.NewDecoder(jsonData.Body).Decode(&Detailesdata); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	// fmt.Println("Detailes data: ", )
-
-	// var artistData *artistData
-	// if err := json.NewDecoder(jsonData.Body).Decode(&artistData); err != nil {
-	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
-	// 	return
-
-	// }
+	fmt.Println("Detailes data: ", NewDetails)
 
 	// parse the template and pass the data to the front end
 	tmpl, err := template.ParseFiles("./web/templates/Details.html")
@@ -170,9 +158,8 @@ func HandleDetailesPage(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	fmt.Println("Detailesdata", Detailesdata)
 	// execute the template and pass the data to the front end
-	err = tmpl.Execute(w, Detailesdata)
+	err = tmpl.Execute(w, NewDetails)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
