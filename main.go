@@ -3,19 +3,18 @@ package main
 import (
 	"fmt"
 	groupie_tracker "groupie-tracker/handlers"
-
 	"net/http"
 )
 
 func main() {
 	Port := ":3000"
-	// THE HANDLEFUNC FUNCTION WILL HANDLE THE REQUESTS TO THE API
-	// http.HandleFunc("/api/artists", groupie_tracker.HandleArtistsRequest)
-	// http.HandleFunc("/api/dates", groupie_tracker.HandleDatesRequest)
-	// http.HandleFunc("/api/locations", groupie_tracker.HandleLocationsRequest)
-	// http.HandleFunc("/api/relation", groupie_tracker.HundelRelationRequest)
+	// Serve static files from the "web/css/" directory for URLs starting with "/Detailes/"
+	http.Handle("/style/", http.StripPrefix("/style/", http.FileServer(http.Dir("./web/css/"))))
 
+	// Handle requests for the home page "/"
 	http.HandleFunc("/", groupie_tracker.HandleArtistsPage)
+
+	// Handle requests for "/Detailes" (assuming it should be "/Details")
 	http.HandleFunc("/Detailes/", groupie_tracker.HandleDetailesPage)
 
 	fmt.Printf("Starting server on %s\n", Port)
