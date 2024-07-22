@@ -24,7 +24,7 @@ body {
     align-items: center;
     padding: 10px;
     font-family: Arial, sans-serif;
-    background: #d6d6d6;
+    background: #030303;
     height: max-content;
     font-family: 'jost', sans-serif;
 }
@@ -49,11 +49,24 @@ nav {
     color: #007bff;
     text-shadow: 1px 1px 1px #007bffad;
 }
+.serchBox{
+    position: fixed;
+    top: 70px;
+    margin-bottom: 10px;
+    width: 100vw;
+    height: 90px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #0000006c;
+    backdrop-filter: blure(8px);
+    z-index: 10;
+}
 
 form {
     width: 30%;
     min-width: 300px;
-    height: 50px;
+    height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,13 +83,23 @@ form input {
     border: none;
     outline: none;
     padding: 0 10px;
-    font-size: 14px;
     border-radius: 5px 0px 0px 5px;
     backdrop-filter: blur(10px);
     background-color: #ffffff00;
     color: #000000;
     caret-color: #007bff;
-    size: 20px;
+    font-size: 14px;
+}
+form select{
+    width: 20%;
+    height: 100%;
+    border: none;
+    outline: none;
+    border-left: 2px solid #000000;
+    padding: 0 10px;
+    font-size: 14px;
+    backdrop-filter: blur(10px);
+    background-color: #ffffff00;
 }
 
 form button {
@@ -94,7 +117,88 @@ form button {
 
 .container {
     position: absolute;
-    top: 80px;
+    top: 160px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: seashell;
+    justify-content: center;
+    align-items: center;
+}
+.container .hero{
+    width: 100%;
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ddd;
+    gap: 10px;
+}
+.container .hero section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.container .hero section:nth-child(1){
+    width: 50%;
+    min-height: 50vh;
+    flex-direction: column;
+}
+.container .hero section:nth-child(2){
+    width: 50%;
+    min-height: 50vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+}
+.container .hero section:nth-child(2) span{
+    position: absolute;
+    align-items: center;
+    width: 240px;
+    height: 300px;
+    color: #ffffffda;
+    background-color: #202022;
+    border-radius: 18px;
+    transform: scale(1);
+    transition: all 150ms ease-in-out; 
+    margin: 10px;
+}
+.container .hero section:nth-child(2) span:nth-child(1){
+    
+    transform:translateX(-300px) rotate(-25deg); 
+    background-color: #cfcfcf;   
+}
+.container .hero section:nth-child(2) span:nth-child(2){
+    transform:translateX(-100px) translateY(-70px)  rotate(-25deg); 
+    background-color: #4b4b4b;   
+}
+.container .hero section:nth-child(2) span:nth-child(3){
+    transform:translateX(100px) translateY(-70px) rotate(25deg); 
+    background-color: #ffb7b7;   
+}
+.container .hero section:nth-child(2) span:nth-child(4){
+    transform:translateX(300px) rotate(25deg); 
+    background-color: #525252;   
+}
+.container .hero section:nth-child(2) span:hover{
+    box-shadow: 1px 2px 10px 0 rgba(0, 0, 0, 0.342);
+}
+
+.container .hero section:nth-child(2) span a,button{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    background-color:transparent;
+}
+.container .cardesBox{
+    width: 80%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -103,8 +207,8 @@ form button {
     gap: 10px;
 }
 
-.card {
-    width: 280px;
+.container .cardesBox .card {
+    width: 250px;
     height: 420;
     padding: 5px;
     border-radius: 8px;
@@ -166,10 +270,16 @@ form button {
 }
 
 .card-content a button {
-    padding: 5px 10px;
+    font-family: 'jost', sans-serif;
+    font-size: auto;
+    font-weight: 400;
+    padding: 8px 16px;
     margin-top: 10px;
-    border: none;
+    border-left:2px solid #007bff;
+    border-right: 2px solid #007bff;
+    border-top: none;
+    border-bottom: none;
     border-radius: 5px;
-    background-color: #007bff;
-    color: white;
+    color: #000000;
+    backdrop-filter: blur(10px);
 }

@@ -13,8 +13,20 @@
 <body>
     <nav>
         <div class="logo">GROUPIE TRACKER</div>
+        <div class="togelTeame">
+            <input type="checkbox" name="" id="">
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+    <div class="serchBox">
         <form>
             <input type="text" name="search">
+            <select name="" id="">
+                <option value="artist">Artist</option>
+                <option value="location">Location</option>
+                <option value="date">Date</option>
+            </select>
             <button type="submit">
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -23,9 +35,22 @@
                 </svg>
             </button>
         </form>
-    </nav>
+    </div>
     <div class="container">
-        {{ range . }}
+        <div class="hero">
+            <section>
+                <h1>Artists</h1>
+                <p>Here you can find all the artists in our database</p>
+            </section>
+            <section>
+                <span><a href=""><button><img src="" alt=""></button></a></span>
+                <span><a href=""><button><img src="" alt=""></button></a></span>
+                <span><a href=""><button><img src="" alt=""></button></a></span>
+                <span><a href=""><button><img src="" alt=""></button></a></span>
+            </section>
+        </div>
+        <div class="cardesBox">
+            {{ range . }}
         <!-- Artist Card -->
         <div class="card">
             <img src="{{ .Image }}" alt="{{ .Name }}" class="card-image">
@@ -33,17 +58,12 @@
                 <h2 class="card-title">{{ .Name }}</h2>
                 <p class="card-info">Creation Date: {{ .CreationDate }}</p>
                 <p class="card-info">First Album: {{ .FirstAlbum }}</p>
-                <p class="card-info">Members:</p>
-                <ul class="card-members">
-                    {{ range .Members }}
-                    <li>{{ . }}</li>
-                    {{ end }}
-                </ul>
                 <a href="/Detailes/?id={{.ID}}"><button>More detailes</button></a>
             </div>
         </div>
-        <!-- End of Artist Card -->
         {{ end }}
+        </div>
+        
     </div>
 </body>
 
