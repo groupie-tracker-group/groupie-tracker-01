@@ -7,15 +7,15 @@ import (
 )
 
 func main() {
-	Port := ":3000"
-	// Serve static files from the "web/css/" directory for URLs starting with "/Detailes/"
+	Port := ":3100"
+	// Serve static files from the "web/css/" directory for URLs starting with "/Details/"
 	http.Handle("/style/", http.StripPrefix("/style/", http.FileServer(http.Dir("./web/css/"))))
 
 	// Handle requests for the home page "/"
 	http.HandleFunc("/", groupie_tracker.HandleArtistsPage)
 
-	// Handle requests for "/Detailes" (assuming it should be "/Details")
-	http.HandleFunc("/Detailes/", groupie_tracker.HandleDetailesPage)
+	// Handle requests for "/Details" (assuming it should be "/Details")
+	http.HandleFunc("/Details/", groupie_tracker.HandleDetailsPage)
 
 	fmt.Printf("Starting server on %s\n", Port)
 	fmt.Println("http://localhost" + Port)

@@ -197,11 +197,11 @@ form button {
     justify-content: space-between;
     backdrop-filter: blur(10px);
 }
-.Detailes .rolaitions {
+.Detailes .rolations {
     width: calc(100%/3);
 }
 
-.Detailes .rolaitions h4 {
+.Detailes .rolations h4 {
     font-size: 1em;
     color: #303030;
     margin: 4px 0px;
@@ -209,7 +209,7 @@ form button {
     padding: 2px 5px;
 }
 
-.rolaitions table {
+.rolations table {
     width: 100%;
     min-width: 400px;
     font-size: 0.8em;
@@ -217,11 +217,11 @@ form button {
     border: 1px solid #007bff;
      border-collapse:separate;
 }
-.rolaitions Thead{
+.rolations Thead{
     background-color: #007bff;
     color: #ffffff;
 }
-.rolaitions table td{
+.rolations table td{
     padding:4px 8px;
     background-color: #5555554d;
 }

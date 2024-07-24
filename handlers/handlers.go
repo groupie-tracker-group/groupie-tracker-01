@@ -45,7 +45,7 @@ type concertDates struct {
 	Dates []string `json:"dates"`
 }
 
-// THE NEWDETAILS STRUCT WILL HOLD THE DATA OF THE ARTIST
+// THE NewDetails STRUCT WILL HOLD THE DATA OF THE ARTIST
 type NewDetails struct {
 	ArtistData artistData
 	Dates      concertDates
@@ -72,14 +72,14 @@ func HandleArtistsPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// parse the template
-	tmpl, err := template.ParseFiles("./web/templates/Home.html")
+	Template, err := template.ParseFiles("./web/templates/Home.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
 	// execute the template and pass the data to the front end
-	err = tmpl.Execute(w, artistsData)
-	if err != nil {
+	if err = Template.Execute(w, artistsData); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -91,14 +91,14 @@ func getIdFromURL(r *http.Request) string {
 	return id
 }
 
-// THIS GetDATA FUNCTION WILL MAKE A GET REQUEST TO THE API AND  DECODE THE DATA INTO THE DATAFORM STRUCT AND RETURN THE ERROR
-func fetshData(apiEndpoint string, Id string, DataForm interface{}, wg *sync.WaitGroup) {
+// THIS GetDATA FUNCTION WILL MAKE A GET REQUEST TO THE API AND  DECODE THE DATA INTO THE DATA FORM STRUCT AND RETURN THE ERROR
+func FetchData(apiEndpoint string, Id string, DataForm interface{}, wg *sync.WaitGroup) {
 	// defer the done function to the end of the function
 	defer wg.Done()
 	// THE GET FUNCTION WILL MAKE A GET REQUEST TO THE API AND RETURN THE RESPONSE
 	Response, err := http.Get(apiEndpoint + "/" + Id)
 	if err != nil {
-		log.Printf("\033[31m fetshing error \033[0m %s: \033[33m %v \033[0m", apiEndpoint, err)
+		log.Printf("\033[31m fetching error \033[0m %s: \033[33m %v \033[0m", apiEndpoint, err)
 	}
 	// the response body will be closed after the function is done
 	defer Response.Body.Close()
@@ -110,8 +110,8 @@ func fetshData(apiEndpoint string, Id string, DataForm interface{}, wg *sync.Wai
 }
 
 // THIS FUNCTION WILL HANDLE THE REQUEST TO THE DETAILS PAGE
-func HandleDetailesPage(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/Detailes/" {
+func HandleDetailsPage(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/Details/" {
 		http.NotFound(w, r)
 		return
 	}
@@ -131,21 +131,21 @@ func HandleDetailesPage(w http.ResponseWriter, r *http.Request) {
 	// wait for the data to be fetched
 	wg.Add(4)
 	// go routines to fetch the data from the api
-	go fetshData(ArtistApi, id, &NewDetails.ArtistData, &wg)
-	go fetshData(DatesApi, id, &NewDetails.Dates, &wg)
-	go fetshData(LocationsApi, id, &NewDetails.Locations, &wg)
-	go fetshData(RelationsApi, id, &NewDetails.Relations, &wg)
+	go FetchData(ArtistApi, id, &NewDetails.ArtistData, &wg)
+	go FetchData(DatesApi, id, &NewDetails.Dates, &wg)
+	go FetchData(LocationsApi, id, &NewDetails.Locations, &wg)
+	go FetchData(RelationsApi, id, &NewDetails.Relations, &wg)
 	// wait still done for the 4 go routines to finish
 	wg.Wait()
 
 	// parse the template and pass the data to the front end
-	tmpl, err := template.ParseFiles("./web/templates/Details.html")
+	Template, err := template.ParseFiles("./web/templates/Details.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 	// execute the template and pass the data to the front end
-	if err := tmpl.Execute(w, NewDetails); err != nil {
+	if err := Template.Execute(w, NewDetails); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
