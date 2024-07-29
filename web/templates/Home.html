@@ -34,17 +34,18 @@
       </ul>
      </menu>
       <div class="search">
-        <input type="checkbox" name="search" id="search-checkbox" />
+        <input type="checkbox" id="search-checkbox" />
         <label for="search-checkbox">
           <i class="fi fi-rr-search"></i>
         </label>
         <div class="searchBox">
           <form>
-            <input type="text" name="search" />
-            <select name="" id="">
+            <input type="text" name="Value" />
+            <select name="Key" id="">
               <option value="artist">Artist</option>
               <option value="location">Location</option>
               <option value="date">Date</option>
+              <option value="rolation">rolation</option>
             </select>
             <button type="submit">
               <i class="fi fi-rr-search"></i>
@@ -96,12 +97,10 @@
     </div>
 
     <script>
-      window.addEventListener("scroll", (e) => {
-        var nav = document.querySelector(".searchBox");
-        if (window.scrollY > 0) {
-          nav.classList.add("scrolled");
-        } else {
-          nav.classList.remove("scrolled");
+      window.addEventListener("resize", (e) => {
+        var nav = document.querySelector("#togel");
+        if (window.innerWidth > 768) {
+          nav.checked = false;
         }
       });
     </script>

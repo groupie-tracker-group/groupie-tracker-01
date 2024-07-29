@@ -53,38 +53,6 @@ type NewDetails struct {
 	Relations  datesLocations
 }
 
-// THIS FUNCTION WILL HANDLE THE REQUEST TO THE HOME PAGE
-func HandleArtistsPage(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path != "/" {
-		http.NotFound(w, r)
-		return
-	}
-	// get the data from the api
-	jsonData, err := http.Get(ArtistApi)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	// decode the data into the artist struct
-	var artistsData []artistData
-	if err := json.NewDecoder(jsonData.Body).Decode(&artistsData); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-	// parse the template
-	Template, err := template.ParseFiles("./web/templates/Home.html")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	// execute the template and pass the data to the front end
-	if err = Template.Execute(w, artistsData); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-}
-
 // THIS FUNCTION WILL GET THE ID FROM THE URL
 func getIdFromURL(r *http.Request) string {
 	id := r.URL.Query().Get("id")
@@ -105,6 +73,64 @@ func FetchData(apiEndpoint string, Id string, DataForm interface{}, wg *sync.Wai
 
 	if err := json.NewDecoder(Response.Body).Decode(DataForm); err != nil {
 		log.Printf("\033[31m decoding error \033[0m %s: \033[33m %v \033[0m", apiEndpoint, err)
+		return
+	}
+}
+
+func searchBy(key string, value string) interface{} {
+	switch key {
+	case "artist":
+		// find the artist by name
+		return artistData{Name: value}
+	case "dates":
+		return concertDates{Dates: []string{value}}
+	case "locations":
+		return locations{LocationS: []string{value}}
+	case "relations":
+		return datesLocations{DatesLocations: map[string][]string{value: {}}}
+	default:
+		return nil
+	}
+}
+
+func Search(w http.ResponseWriter, r *http.Request) {
+	key := r.URL.Query().Get("Key")
+	value := r.URL.Query().Get("Value")
+	data := searchBy(key, value)
+	log.Println(data)
+}
+
+// THIS FUNCTION WILL HANDLE THE REQUEST TO THE HOME PAGE
+func HandleArtistsPage(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
+		return
+	}
+	// get the data from the api
+	jsonData, err := http.Get(ArtistApi)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	// decode the data into the artist struct
+	var artistsData []artistData
+	if err := json.NewDecoder(jsonData.Body).Decode(&artistsData); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	Search(w, r)
+
+	// parse the template
+	Template, err := template.ParseFiles("./web/templates/Home.html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// execute the template and pass the data to the front end
+	if err = Template.Execute(w, artistsData); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 }

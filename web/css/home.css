@@ -61,7 +61,7 @@ nav {
     top: 0px;
     margin-bottom: 10px;
     width: 100vw;
-    height: 90px;
+    height: 70px;
     display: flex;
     border-radius: 0px 0px 22px 22px;
     justify-content: space-evenly;
@@ -468,10 +468,6 @@ button {
 }
 
 @media screen and (max-width: 768px) {
-    nav {
-        height: 90px;
-    }
-
     nav .logo {
         font-size: 20px;
     }

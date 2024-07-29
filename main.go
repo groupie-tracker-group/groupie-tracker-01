@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	Port := ":3000"
+	Port := ":3100"
 	// Serve static files from the "web/css/" directory for URLs starting with "/Details/"
 	http.Handle("/style/", http.StripPrefix("/style/", http.FileServer(http.Dir("./web/css/"))))
 
