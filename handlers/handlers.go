@@ -77,28 +77,28 @@ func FetchData(apiEndpoint string, Id string, DataForm interface{}, wg *sync.Wai
 	}
 }
 
-func searchBy(key string, value string) interface{} {
-	switch key {
-	case "artist":
-		// find the artist by name
-		return artistData{Name: value}
-	case "dates":
-		return concertDates{Dates: []string{value}}
-	case "locations":
-		return locations{LocationS: []string{value}}
-	case "relations":
-		return datesLocations{DatesLocations: map[string][]string{value: {}}}
-	default:
-		return nil
-	}
-}
+// func searchBy(key string, value string) interface{} {
+// 	switch key {
+// 	case "artist":
+// 		// find the artist by name
+// 		return artistData{Name: value}
+// 	case "dates":
+// 		return concertDates{Dates: []string{value}}
+// 	case "locations":
+// 		return locations{LocationS: []string{value}}
+// 	case "relations":
+// 		return datesLocations{DatesLocations: map[string][]string{value: {}}}
+// 	default:
+// 		return nil
+// 	}
+// }
 
-func Search(w http.ResponseWriter, r *http.Request) {
-	key := r.URL.Query().Get("Key")
-	value := r.URL.Query().Get("Value")
-	data := searchBy(key, value)
-	log.Println(data)
-}
+// func Search(w http.ResponseWriter, r *http.Request) {
+// 	key := r.URL.Query().Get("Key")
+// 	value := r.URL.Query().Get("Value")
+// 	data := searchBy(key, value)
+// 	log.Println(data)
+// }
 
 // THIS FUNCTION WILL HANDLE THE REQUEST TO THE HOME PAGE
 func HandleArtistsPage(w http.ResponseWriter, r *http.Request) {
