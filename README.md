@@ -22,7 +22,6 @@ This project is licensed under the [Zone01Oujda Programe 01 Talent License].
 
 
 ## Contributors
-- [yrahhaou](https://learn.zone01oujda.ma/git/yrahhaou)
 - [melfihry](https://learn.zone01oujda.ma/git/melfihry)
 - [obenali](https://learn.zone01oujda.ma/git/obenali)
 
