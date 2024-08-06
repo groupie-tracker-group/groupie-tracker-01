@@ -73,12 +73,13 @@ nav {
 
 
 
-.logo {
+.logo a {
     text-align: start;
     font-size: 30px;
     font-weight: 700;
     color: var(--color-primary-a10);
     text-shadow: 1px 1px 1px #a7a7a7ad;
+    text-decoration: none;
 }
 
 nav menu {
@@ -304,6 +305,7 @@ form button i {
     flex-direction: column;
     justify-self: start;
     align-items: flex-start;
+    padding: 0;
 }
 
 
@@ -328,14 +330,14 @@ p {
     padding: 2px 5px;
 }
 
-ul{
+.card-content ul{
     width: 100%;
-    min-height: 400px;
-    max-height: 400px;
-    padding: 10px;
+    max-height: 300px;
+    font-size: small;
     margin: 10px;
     color:var(--color-primary-a01);
-
+    overflow: auto;
+    list-style: circle;
 }
 
 
@@ -348,26 +350,24 @@ ul{
     color: white;
 }
 
-.Detailes {
+.Details {
     width: 100%;
     display: flex;
     justify-content: space-between;
     backdrop-filter: blur(10px);
 }
 
-.Detailes .rolations {
+.card-info{
+    font-size: medium;
+    color: var(--color-primary-a0);
+}
+
+.Details .relations {
     width: 100%;
     padding: 10px;
 }
 
-.Detailes .rolations h4 {
-    color: #ffffff;
-    margin: 4px 0px;
-    border-left: 2px solid var(--color-primary-a50);
-    padding: 2px 5px;
-}
-
-.rolations table {
+.relations table {
     width: 100%;
     font-size: 0.8em;
     color: var(--color-primary-a10);
@@ -376,18 +376,18 @@ ul{
     border-radius: 8px;
 }
 
-.rolations Thead {
+.relations Thead {
     background-color: var(--color-primary-a50);
     color: var(--color-primary-a0);
 }
 
-.rolations table td {
+.relations table td {
     padding: 4px 8px;
     background-color: var(--color-primary-a110);
 }
 
 @media screen and (max-width: 768px) {
-    nav .logo {
+    nav .logo a{
         font-size: 20px;
     }
 
@@ -437,23 +437,12 @@ ul{
         margin: 0 5px;
     }
 
-
-    .card-content ul {
-        min-width: 100%;
-        max-height: 400px;
-        padding: 10px;
-        font-size: larger;
-        background-color: #a3969677;
-        overflow-y: auto;
-
-    }
-
     .card-members li {
         color: var(--color-primary-a01);
         font-size: 0.7em;
     }
 
-   .rolations {
+   .relations {
         width: 100%;
         padding: 10px;
     }

@@ -18,12 +18,6 @@ func main() {
 	http.HandleFunc("/Details/", groupie_tracker.HandleDetailsPage)
 
 
-	// fmt.Printf("Starting server on %s\n", Ip+Port)
-	// fmt.Println(Ip + Port)
-	// server := &http.Server{Addr: Ip + Port}
-	// server.ListenAndServe()
-
-
 	fmt.Printf("Starting server on %s\n", Port)
 	fmt.Println("http://localhost" + Port)
 	if err := http.ListenAndServe(Port, nil); err != nil {

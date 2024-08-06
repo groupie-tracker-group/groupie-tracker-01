@@ -19,7 +19,7 @@
 
   <body>
     <nav>
-      <div class="logo">GROUPIE TRACKER</div>
+      <div class="logo"><a href="/">GROUPIE TRACKER</a></div>
 
      <menu>
       <input type="checkbox" name="" id="togel">
@@ -28,9 +28,8 @@
       </label>
       <ul>
         <li><a href="#Hero">Home</a></li>
-        <li><a href="#Albomes">Albomes</a></li>
-        <li><a href="">About</a></li>
-        <li><a href="">Colaboraters</a></li>
+        <li><a href="#Albums">Albums</a></li>
+        <li><a href="#footer">Collaborators</a></li>
       </ul>
      </menu>
       <div class="search">
@@ -58,29 +57,11 @@
     <div class="container" id="Hero">
       <div class="hero">
         <section>
-          <h1>Artists</h1>
-          <p>Here you can find all the artists in our database</p>
+          <h1>Welcome to Groupie Tracker</h1>
+          <p>Stay connected with Dune. Track releases, events, and more.</p>
         </section>
-        <!--<section>
-          <span
-            ><a href=""
-              ><button><img src="" alt="" /></button></a
-          ></span>
-          <span
-            ><a href=""
-              ><button><img src="" alt="" /></button></a
-          ></span>
-          <span
-            ><a href=""
-              ><button><img src="" alt="" /></button></a
-          ></span>
-          <span
-            ><a href=""
-              ><button><img src="" alt="" /></button></a
-          ></span>
-        </section> -->
       </div>
-      <div class="cardesBox" id="Albomes">
+      <div class="cardesBox" id="Albums">
         {{ range . }}
         <!-- Artist Card -->
         <div class="card">
@@ -95,7 +76,9 @@
         {{ end }}
       </div>
     </div>
-
+    <footer id="footer">
+      <p>created by <a href="https://github.com/fihry"> Mohamed el </a> and <a href="https://github.com/BenaliOssama"> Benali Ossama </a></p>
+    </footer>
     <script>
       window.addEventListener("resize", (e) => {
         var nav = document.querySelector("#togel");

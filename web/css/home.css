@@ -44,7 +44,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
     font-family: Arial, sans-serif;
     height: max-content;
     font-family: 'jost', sans-serif;
@@ -73,12 +72,13 @@ nav {
 
 
 
-.logo {
+nav .logo a {
     text-align: start;
     font-size: 30px;
     font-weight: 700;
     color: var(--color-primary-a10);
     text-shadow: 1px 1px 1px #a7a7a7ad;
+    text-decoration: none;
 }
 
 nav menu  {
@@ -131,7 +131,7 @@ nav span {
 }
 
 nav menu label {
-   visibility: hidden;
+    visibility: hidden;
     position: absolute;
     right: 20px;
     display: flex;
@@ -151,6 +151,7 @@ label i {
     justify-content: center;
     align-items: center;
     color: var(--color-primary-a10);
+   
 }
 
 nav .search label {
@@ -162,6 +163,9 @@ nav .search label {
     padding: 10px;
     width: 35px;
     height: 35px;
+    border: 1px solid var(--color-primary-a10);
+    border-radius: 5px;
+    
 }
 
 
@@ -184,13 +188,14 @@ nav .search #search-checkbox:checked + label {
     background-color: var(--color-primary-a01);
     border-radius: 4px;
 }
-.searchBox{
+.searchBox {
     visibility: hidden;
     position: fixed;
-    top: 96px;
-    right: 0;
+    left: 50%;
+    top: 95px;
+    transform: translateX(-50%);
     margin-bottom: 10px;
-    width: 100vw;
+    width: 80vw;
     height: 90px;
     border-radius: 12px;
     display: flex;
@@ -200,6 +205,7 @@ nav .search #search-checkbox:checked + label {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.342);
     z-index: 10;
 }
+
 nav menu #togel:checked + label {
     background-color: #ffffff4f;
 }
@@ -292,7 +298,7 @@ form button i {
     gap: 10px;
 }
 
-.container .hero section:nth-child(1) {
+.container .hero section:nth-child(1){
     min-height: 50vh;
     flex-direction: column;
     justify-content: center;
@@ -306,8 +312,6 @@ form button i {
     -webkit-text-fill-color: transparent;
     -webkit-text-fill-color: transparent;
 }
-
-.container .hero section:nth-child(1) h1 {}
 
 .container .hero section:nth-child(2) {
     width: 50%;
@@ -463,8 +467,22 @@ button {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    transition: background 150ms ease-in-out;
+}
 
+footer{
+    width: 100%;
+    height: 70px;
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 22px 22px 0px 0px;
+    background:var(--color-primary-a80);
+    color:var(--color-primary-a0);
+}
+footer a{
+    text-decoration: none;
+    color:#938610;
 }
 
 @media screen and (max-width: 768px) {
@@ -477,7 +495,7 @@ button {
     nav menu ul {
         display: none;
         position: absolute;
-        top: 100px;
+        top: 80px;
         left: 0;
         width: 100%;
         background-color: var(--color-primary-a80);
@@ -488,11 +506,12 @@ button {
         justify-content: center;
         align-items: center;
         width: 100%;
+        padding: 8px;
     }
 
     nav .search .searchBox {
         top: 100px;
-        width: 100vw;
+        width: 80vw;
         height: 90px;
         z-index:11;
     }
@@ -504,6 +523,10 @@ button {
 
     nav .search .searchBox form {
         width: 80%;
+    }
+
+    .container .cardesBox .card {
+        width: 230px;
     }
     
 }
