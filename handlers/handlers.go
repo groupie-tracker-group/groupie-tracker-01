@@ -119,7 +119,7 @@ func HandleArtistsPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	Search(w, r)
+	// Search(w, r)
 
 	// parse the template
 	Template, err := template.ParseFiles("./web/templates/Home.html")
