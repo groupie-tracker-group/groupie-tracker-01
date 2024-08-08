@@ -164,7 +164,7 @@ label i {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-
+    padding: 10px;
 }
 
 .box {
@@ -200,7 +200,7 @@ label i {
     flex-direction: column;
     justify-self: start;
     align-items: flex-start;
-    padding: 0;
+    padding: 10px;
 }
 
 
@@ -268,30 +268,15 @@ p {
     border-radius: 8px;
 }
 
-.relations Thead {
-    background-color: var(--color-primary-a50);
-    color: var(--color-primary-a0);
-}
-
-.relations table td {
+.relations table tr td {
     padding: 4px 8px;
-    background-color: var(--color-primary-a110);
+    color: var(--color-primary-a0);
+    background-color: var(--color-primary-a70);
 }
 
 @media screen and (max-width: 768px) {
     nav .logo a{
         font-size: 20px;
-    }
-
-    nav .search .searchBox {
-        top: 100px;
-        width: 100vw;
-        height: 90px;
-        z-index: 11;
-    }
-
-    nav .search .searchBox form {
-        width: 80%;
     }
 
     .boxContent {
@@ -305,10 +290,10 @@ p {
     }
 
     .card-image {
-        max-width: 80%;
         height: 300px;
         object-fit: cover;
         border-radius: 8px;
+        margin: 5px;
     }
 
     .card-content {
@@ -316,7 +301,10 @@ p {
         display: flex;
         flex-direction: column;
         justify-self: start;
-        align-items: center;
+        align-items:start;
+    }
+    .card-info{
+        padding-left: 10px;
     }
 
     .card-content h2 {
