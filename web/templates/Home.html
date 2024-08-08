@@ -8,9 +8,7 @@
     <title>Artists</title>
     <head>
       <!-- Other head elements -->
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css"
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css"
       />
     </head>
     <link rel="stylesheet" href="/style/home.css" />
@@ -30,37 +28,15 @@
         <li><a href="#Hero">Home</a></li>
         <li><a href="#Albums">Albums</a></li>
         <li><a href="#footer">Collaborators</a></li>
-      </ul>
+      </ul>    <!-- Include your CSS stylesheet -->
      </menu>
-      <div class="search">
-        <input type="checkbox" id="search-checkbox" />
-        <label for="search-checkbox">
-          <i class="fi fi-rr-search"></i>
-        </label>
-        <div class="searchBox">
-          <form>
-            <input type="text" name="Value" />
-            <select name="Key" id="">
-              <option value="artist">Artist</option>
-              <option value="location">Location</option>
-              <option value="date">Date</option>
-              <option value="rolation">rolation</option>
-            </select>
-            <button type="submit">
-              <i class="fi fi-rr-search"></i>
-            </button>
-          </form>
-        </div>
-      </div>
     </nav>
 
     <div class="container" id="Hero">
-      <div class="hero">
-        <section>
-          <h1>Welcome to Groupie Tracker</h1>
-          <p>Stay connected with Dune. Track releases, events, and more.</p>
-        </section>
-      </div>
+       <div class="hero">
+        <h1>Welcome to Groupie Tracker</h1>
+        <p>Stay connected with Dune. Track releases, events, and more.</p>
+       </div>
       <div class="cardesBox" id="Albums">
         {{ range . }}
         <!-- Artist Card -->
@@ -77,7 +53,7 @@
       </div>
     </div>
     <footer id="footer">
-      <p>created by <a href="https://github.com/fihry"> Mohamed el </a> and <a href="https://github.com/BenaliOssama"> Benali Ossama </a></p>
+      <p>created by <a href="https://github.com/fihry"> Mohamed el fihry </a> and <a href="https://github.com/BenaliOssama"> Benali Ossama </a></p>
     </footer>
     <script>
       window.addEventListener("resize", (e) => {
