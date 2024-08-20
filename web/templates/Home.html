@@ -56,12 +56,13 @@
 
     <div class="container" id="Hero">
       <div class="hero">
-        <section>
           <h1>Welcome to Groupie Tracker</h1>
           <p>Stay connected with Dune. Track releases, events, and more.</p>
-        </section>
       </div>
-      <div class="cardesBox" id="Albums">
+      <div class="cardsBox" id="Albums">
+        <span>Discover your favorite bands</span>
+      </div>
+      <div class="cards">
         {{ range . }}
         <!-- Artist Card -->
         <div class="card">
@@ -74,6 +75,7 @@
           </div>
         </div>
         {{ end }}
+      </div>
       </div>
     </div>
     <footer id="footer">

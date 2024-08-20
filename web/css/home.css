@@ -280,100 +280,52 @@ form button i {
     align-items: center;
 }
 
-.container .hero {
-    width: 90%;
-    min-height: 100vh;
+.container .hero{
+    height: 100vh;
     display: flex;
-    backdrop-filter: blur(10px);
-    border-radius: 22px;
-    justify-content: center;
+    justify-content:center ;
     align-items: center;
-    gap: 10px;
-}
-
-.container .hero section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.container .hero section:nth-child(1){
-    min-height: 50vh;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
+    text-align: center;
     font-weight: 900;
-    color: #960496;
     background-image: -webkit-linear-gradient(0deg, #960496 0%, #938610 50%, #2bc01d 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-text-fill-color: transparent;
 }
+.container .hero h1{
+    font-size: 3em;
+    margin: 0 5px;
+}
+.container .hero p{
+    font-size: 1.5em;
 
-.container .hero section:nth-child(2) {
-    width: 50%;
-    min-height: 50vh;
+    width: 70%;
+}
+
+.container .cardsBox {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 10px;
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
 }
 
-.container .hero section:nth-child(2) span {
-    position: absolute;
-    align-items: center;
-    width: 240px;
-    height: 300px;
-    color: #ffffffda;
-    border-radius: 18px;
-    transform: scale(1);
-    transition: all 150ms ease-in-out;
-    margin: 10px;
-}
-
-.container .hero section:nth-child(2) span:nth-child(1) {
-
-    transform: translateX(-300px) rotate(-25deg);
-    background-color: #cfcfcf;
-}
-
-.container .hero section:nth-child(2) span:nth-child(2) {
-    transform: translateX(-100px) translateY(-70px) rotate(-25deg);
-    background-color: #4b4b4b;
-}
-
-.container .hero section:nth-child(2) span:nth-child(3) {
-    transform: translateX(100px) translateY(-70px) rotate(25deg);
-    background-color: #ffb7b7;
-}
-
-.container .hero section:nth-child(2) span:nth-child(4) {
-    transform: translateX(300px) rotate(25deg);
-    background-color: #525252;
-}
-
-.container .hero section:nth-child(2) span:hover {
-    box-shadow: 1px 2px 10px 0 rgba(0, 0, 0, 0.342);
-}
-
-.container .hero section:nth-child(2) span a,
-button {
+.container .cardsBox span {
     width: 100%;
-    height: 100%;
-    outline: none;
-    border: none;
-    border-radius: 8px;
-    background-color: transparent;
+    font-size: 2em;
+    text-align: center;
+    padding-top:100px ;
+    background-image: -webkit-linear-gradient(0deg, #960496 0%, #938610 50%, #2bc01d 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.container .cardesBox {
-    top: 120px !important;
+.cards{
+    margin-top: 20px ;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -383,24 +335,25 @@ button {
     gap: 10px;
 }
 
-.container .cardesBox .card {
-    /* width: clamp(280px, 90%, 300px); */
+.container .cardsBox .card {
     padding: 5px 10px;
     border-radius: 8px;
     color: var(--color-primary-a0);
     background: linear-gradient(#fff2, transparent);
     backdrop-filter: blur(10px);
-    transition: transform 0.3s ease-in-out;
 }
 
-.container .cardesBox .card:hover {
-    transform: translatez(10px);
-    box-shadow: 1px 2px 8px 3px rgba(197, 197, 197, 0.247), 0 6px 20px 0 rgba(255, 255, 255, 0.1);
+.card p {
+    font-size: 1em;
+    color :var(--color-primary-a0)
+}
+
+.container .cardsBox .card:hover {
+    box-shadow: 1px 2px 8px 3px rgba(197, 197, 197, 0.247);
 }
 
 .card-image {
     width: 100%;
-    object-fit: cover;
     border-radius: 8px;
 }
 
@@ -414,12 +367,9 @@ button {
 }
 
 .card-content h2 {
-    width: 100%;
-    color: #960496;
     background-image: -webkit-linear-gradient(0deg, #960496 0%, #938610 50%, #2bc01d 100%);
     background-clip: text;
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     -webkit-text-fill-color: transparent;
 }
 
@@ -431,7 +381,7 @@ button {
 .card-info {
     font-size: 0.8em;
     margin: 4px 0px;
-    border-left: 2px solid #007bff;
+    border-left: 2px solid var(--color-primary-a50);
     padding: 2px 5px;
 }
 
@@ -453,23 +403,17 @@ button {
     margin: 5px;
     border-radius: 4px;
     cursor: pointer;
-    border:1px solid var(--color-primary-a100);
+    border: 1px solid var(--color-primary-a100);
     font-family: 'jost', sans-serif;
     color: var(--color-primary-a0);
-    background: url(./blob-scene-btn.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    /* backdrop-filter: blur(10px); */
-}
-.card-content a button:hover {
-    background: url(./blob-scene-btn-hover.svg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    background-color: var(--color-primary-a60);
 }
 
-footer{
+.card-content a button:hover {
+    background-color: var(--color-primary-a70);
+}
+
+footer {
     width: 100%;
     height: 70px;
     font-size: large;
@@ -477,21 +421,24 @@ footer{
     justify-content: center;
     align-items: center;
     border-radius: 22px 22px 0px 0px;
-    background:var(--color-primary-a80);
-    color:var(--color-primary-a0);
+    background: var(--color-primary-a80);
+    color: var(--color-primary-a0);
 }
-footer a{
+
+footer a {
     text-decoration: none;
-    color:#938610;
+    color: #938610;
 }
 
 @media screen and (max-width: 768px) {
     nav .logo {
         font-size: 20px;
     }
+
     nav menu label {
         visibility: visible;
     }
+
     nav menu ul {
         display: none;
         position: absolute;
@@ -501,6 +448,7 @@ footer a{
         background-color: var(--color-primary-a80);
         z-index: 11;
     }
+
     nav menu ul li {
         display: flex;
         justify-content: center;
@@ -513,20 +461,15 @@ footer a{
         top: 100px;
         width: 80vw;
         height: 90px;
-        z-index:11;
+        z-index: 11;
     }
-
-    /* nav menu label {
-        position: fixed;
-        top: 25px;
-    } */
 
     nav .search .searchBox form {
         width: 80%;
     }
 
-    .container .cardesBox .card {
+    .container .cardsBox .card {
         width: 230px;
     }
-    
+
 }
