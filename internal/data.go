@@ -1,4 +1,4 @@
-ackage data
+package data
 
 import (
 	"encoding/json"
