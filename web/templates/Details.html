@@ -18,14 +18,14 @@
     <div class="container">
         <div class="box">
             <div class="boxContent">
-                <img src="{{ .ArtistData.Image }}" alt="{{ .ArtistData.Name }}" class="card-image">
+                <img src="{{ .Artist.Image }}" alt="{{ .Artist.Name }}" class="card-image">
                 <div class="card-content">
-                    <h2>{{ .ArtistData.Name }}</h2>
-                    <p class="card-info">Creation Date: {{ .ArtistData.CreationDate }}</p>
-                    <p class="card-info">First Album: {{ .ArtistData.FirstAlbum }}</p>
+                    <h2>{{ .Artist.Name }}</h2>
+                    <p class="card-info">Creation Date: {{ .Artist.CreationDate }}</p>
+                    <p class="card-info">First Album: {{ .Artist.FirstAlbum }}</p>
                     <p class="card-info">Members:</p>
                     <ul>
-                        {{ range .ArtistData.Members }}
+                        {{ range .Artist.Members }}
                         <li>{{ . }}</li>
                         {{ end }}
                     </ul>
@@ -37,16 +37,16 @@
                         <table>
                             <THead>
                                 <tr>
-                                    <td>location</td>
-                                    <td>date</td>
+                                    <td>Location</td>
+                                    <td>Date</td>
                                 </tr>
                             </THead>
                             <Tbody>
-                            {{range $locations, $date:= .Relations.DatesLocations}}
+                            {{range $Locations, $Date:= .Relations.DatesLocations}}
                             <tr>
-                                <td>{{$locations}}</td>
+                                <td>{{$Locations}}</td>
                                 <td>
-                                    {{range $date}}
+                                    {{range $Date}}
                                     <li>{{.}}</li>
                                     {{end}}
                                 </td>

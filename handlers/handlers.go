@@ -9,7 +9,6 @@ import (
 	"net/http"
 	"strconv"
 	"sync"
-	"fmt"
 )
 
 // THE ARTIST STRUCT WILL HOLD THE DATA OF THE ARTIST
