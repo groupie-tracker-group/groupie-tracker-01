@@ -2,47 +2,48 @@ package data
 
 import (
 	"encoding/json"
-	"net/http"
-	"log"
-	"sync"
-	"fmt"
 	"io"
+	"log"
+	"net/http"
+	"sync"
 )
+
 // first get the api keys from the main api giving
-func init(){
+func init() {
 	Unmarshal()
 }
-type Url struct{
-	ArtistsApi string `json:"artists"`
-	LocationsApi string `json:"locatioins"`
-	DatesApi string `json:"dates"`
+
+type Url struct {
+	ArtistsApi   string `json:"artists"`
+	LocationsApi string `json:"locations"`
+	DatesApi     string `json:"dates"`
 	RelationsApi string `json:"relation"`
 }
 
 var Urls Url
 
-func Unmarshal(){
+func Unmarshal() {
 	API := "https://groupietrackers.herokuapp.com/api"
 	resp, err := http.Get(API)
 	if err != nil {
-		fmt.Println("Error making request:", err)
+		log.Println("Error making request:", err)
 		return
 	}
 	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK{
-		fmt.Println("Error: status code %d\n", resp.StatusCode)
+	if resp.StatusCode != http.StatusOK {
+		log.Println("Error: status code %d\n", resp.StatusCode)
 		return
 	}
-	urlData , err := io.ReadAll(resp.Body)
+	urlData, err := io.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Println("Error reading response body:", err)
+		log.Println("Error reading response body:", err)
 		return
 	}
 	// get the data json in the form of []byte urlData
 	json.Unmarshal(urlData, &Urls)
 }
 
-// this section is for getting the json data from the apis 
+// this section is for getting the json data from the apis
 type ArtistData struct {
 	ID           int      `json:"id"`
 	Name         string   `json:"name"`
@@ -73,10 +74,10 @@ type ConcertDates struct {
 
 // THE NewDetails STRUCT WILL HOLD THE DATA OF THE ARTIST
 type NewDetails struct {
-	Artist ArtistData
-	Dates      ConcertDates
+	Artist    ArtistData
+	Dates     ConcertDates
 	Location  Locations
-	Relations  DatesLocations
+	Relations DatesLocations
 }
 
 // THIS GetDATA FUNCTION WILL MAKE A GET REQUEST TO THE API AND  DECODE THE DATA INTO THE DATA FORM STRUCT AND RETURN THE ERROR

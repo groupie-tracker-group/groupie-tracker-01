@@ -1,8 +1,9 @@
 package groupie_tracker
 
 import (
-	i "groupie-tracker/internal"
 	"encoding/json"
+	"fmt"
+	i "groupie-tracker/internal"
 	"html/template"
 	"log"
 	"net/http"
@@ -11,12 +12,12 @@ import (
 )
 
 // THE ARTIST STRUCT WILL HOLD THE DATA OF THE ARTIST
-var (
-	ArtistApi    = "https://groupietrackers.herokuapp.com/api/artists"
-	RelationsApi = "https://groupietrackers.herokuapp.com/api/relation"
-	DatesApi     = "https://groupietrackers.herokuapp.com/api/dates"
-	LocationsApi = "https://groupietrackers.herokuapp.com/api/locations"
-)
+// var (
+// 	ArtistApi    = "https://groupietrackers.herokuapp.com/api/artists"
+// 	RelationsApi = "https://groupietrackers.herokuapp.com/api/relation"
+// 	DatesApi     = "https://groupietrackers.herokuapp.com/api/dates"
+// 	LocationsApi = "https://groupietrackers.herokuapp.com/api/locations"
+// )
 
 type artistData struct {
 	ID           int      `json:"id"`
@@ -55,10 +56,10 @@ type NewDetails struct {
 }
 
 // THIS FUNCTION WILL GET THE ID FROM THE URL
-func getIdFromURL(r *http.Request) string {
-	id := r.URL.Query().Get("id")
-	return id
-}
+// func getIdFromURL(r *http.Request) string {
+// 	id := r.URL.Query().Get("id")
+// 	return id
+// }
 
 // THIS GetDATA FUNCTION WILL MAKE A GET REQUEST TO THE API AND  DECODE THE DATA INTO THE DATA FORM STRUCT AND RETURN THE ERROR
 func FetchData(apiEndpoint string, Id string, DataForm interface{}, wg *sync.WaitGroup) {
@@ -144,6 +145,7 @@ func HandleDetailsPage(w http.ResponseWriter, r *http.Request) {
 	}
 	// get the id from the url
 	id := r.FormValue("id")
+	fmt.Println(id)
 
 	// check if the id is empty
 	Id, _ := strconv.Atoi(id)
