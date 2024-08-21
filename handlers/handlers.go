@@ -107,7 +107,11 @@ func HandleArtistsPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// get the data from the api
+<<<<<<< Updated upstream
 	jsonData, err := http.Get(ArtistApi)
+=======
+	jsonData, err := http.Get(i.Urls.ArtistsApi)
+>>>>>>> Stashed changes
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -142,7 +146,11 @@ func HandleDetailsPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// get the id from the url
+<<<<<<< Updated upstream
 	id := getIdFromURL(r)
+=======
+	id := r.FormValue("id")
+>>>>>>> Stashed changes
 
 	// check if the id is empty
 	Id, _ := strconv.Atoi(id)
@@ -151,16 +159,27 @@ func HandleDetailsPage(w http.ResponseWriter, r *http.Request) {
 		return
 
 	}
+<<<<<<< Updated upstream
 	var NewDetails NewDetails
 
+=======
+	var Details i.NewDetails
+>>>>>>> Stashed changes
 	wg := sync.WaitGroup{}
 	// wait for the data to be fetched
 	wg.Add(4)
 	// go routines to fetch the data from the api
+<<<<<<< Updated upstream
 	go FetchData(ArtistApi, id, &NewDetails.ArtistData, &wg)
 	go FetchData(DatesApi, id, &NewDetails.Dates, &wg)
 	go FetchData(LocationsApi, id, &NewDetails.Locations, &wg)
 	go FetchData(RelationsApi, id, &NewDetails.Relations, &wg)
+=======
+	go i.FetchData(i.Urls.ArtistsApi, id, &Details.Artist, &wg)
+	go i.FetchData(i.Urls.DatesApi, id, &Details.Dates, &wg)
+	go i.FetchData(i.Urls.LocationsApi, id, &Details.Location, &wg)
+	go i.FetchData(i.Urls.RelationsApi, id, &Details.Relations, &wg)
+>>>>>>> Stashed changes
 	// wait still done for the 4 go routines to finish
 	wg.Wait()
 
@@ -171,7 +190,7 @@ func HandleDetailsPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// execute the template and pass the data to the front end
-	if err := Template.Execute(w, NewDetails); err != nil {
+	if err := Template.Execute(w, Details); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
