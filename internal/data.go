@@ -97,3 +97,4 @@ func FetchData(apiEndpoint string, Id string, DataForm interface{}, wg *sync.Wai
 		return
 	}
 }
+
