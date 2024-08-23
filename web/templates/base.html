@@ -1,0 +1,80 @@
+{{define "base"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artists</title>
+
+  <head>
+	  <!--Other head elements -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@flaticon/flaticon-uicons/css/all/all.css" />
+  </head>
+  <link rel="stylesheet" href="/style/home.css" />
+  <!-- Include your CSS stylesheet -->-->
+</head>
+
+<body>
+	{{template "nav_bar" . }}
+	{{template "main" . }}
+
+  <footer id="footer">
+    <p>
+      created by <a href="https://github.com/fihry"> Mohamed el fihry </a> and
+      <a href="https://github.com/BenaliOssama"> Benali Ossama </a>
+    </p>
+  </footer>
+  <script>
+    window.addEventListener("resize", (e) => {
+      var nav = document.querySelector("#togel");
+      if (window.innerWidth > 768) {
+        nav.checked = false;
+      }
+	});
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const input = document.getElementById("custom-input");
+      const dropdown = document.getElementById("dropdown");
+      const items = dropdown.querySelectorAll(".dropdown-item");
+
+      input.addEventListener("input", () => {
+        const value = input.value.toLowerCase();
+        dropdown.style.display = "none";
+        items.forEach((item) => {
+          if (value === "") {
+            item.style.display = "block";
+            dropdown.style.display = "none";
+            return;
+          }
+          if (item.textContent.toLocaleLowerCase().includes(value)) {
+            item.style.display = "block";
+            dropdown.style.display = "block";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      });
+
+      // items.forEach((item) => {
+      //   item.addEventListener("click", () => {
+      //     input.value = item.getAttribute("data-value");
+      //     dropdown.style.display = "none";
+      //   });
+      // });
+
+      document.addEventListener("click", (event) => {
+        if (!event.target.closest(".custom-datalist")) {
+          dropdown.style.display = "none";
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
+{{ end }}
+
+
+
+  

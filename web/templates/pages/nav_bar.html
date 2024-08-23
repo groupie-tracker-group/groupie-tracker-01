@@ -1,0 +1,49 @@
+{{define "nav_bar"}}
+<nav>
+    <div class="logo"><a href="/">GROUPIE TRACKER</a></div>
+    <menu>
+      <input type="checkbox" name="" id="togel" />
+      <label for="togel">
+        <i class="fi fi-rr-apps"></i>
+      </label>
+      <ul>
+        <li><a href="#Hero">Home</a></li>
+        <li><a href="#Albums">Albums</a></li>
+        <li><a href="#footer">Collaborators</a></li>
+      </ul>
+      <!-- Include your CSS stylesheet -->
+    </menu>
+    <div class="search">
+      <input type="checkbox" id="search-checkbox" />
+      <label for="search-checkbox">
+        <i class="fi fi-rr-search"></i>
+      </label>
+      <div class="searchBox">
+        <form>
+          <div class="custom-datalist">
+            <input type="text" id="custom-input" placeholder="Search..." />
+            <ul id="dropdown" class="dropdown-content">
+              {{ range . }}
+              <li class="dropdown-item" data-value="{{ .Name}}">
+                <a href="/Details/?id={{.ID}}">
+                  <img src="{{ .Image }}" alt="{{ .Name }}" />
+                  {{.Name}}
+                </a>
+              </li>
+              {{ end }}
+            </ul>
+          </div>
+          <select name="Key">
+            <option value="artist">Artist</option>
+            <option value="location">Location</option>
+            <option value="date">Date</option>
+            <option value="relation">Relation</option>
+          </select>
+          <button type="submit">
+            <i class="fi fi-rr-search"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+{{end}}

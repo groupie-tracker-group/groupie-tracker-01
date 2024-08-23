@@ -99,20 +99,23 @@ func HandleArtistsPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Search(w, r)
 
-	// parse the template
-	Template, err := template.ParseFiles("./web/templates/Home.html")
+	files := []string{
+    	"./web/templates/base.html",
+		"./web/templates/pages/main.html",
+   		"./web/templates/pages/nav_bar.html",
+	}
+	Template, err := template.ParseFiles(files...)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
+   		 http.Error(w, err.Error(), http.StatusInternalServerError)
+   		 return
 	}
 
 	// execute the template and pass the data to the front end
-	if err = Template.Execute(w, artistsData); err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+	if err = Template.ExecuteTemplate(w, "base", artistsData); err != nil {
+    http.Error(w, err.Error(), http.StatusInternalServerError)
+    return
+}
 }
 
 // THIS FUNCTION WILL HANDLE THE REQUEST TO THE DETAILS PAGE
@@ -150,7 +153,7 @@ func HandleDetailsPage(w http.ResponseWriter, r *http.Request) {
 	wg.Wait()
 
 	// parse the template and pass the data to the front end
-	Template, err := template.ParseFiles("./web/templates/Details.html")
+	Template, err := template.ParseFiles("./web/templates/details.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

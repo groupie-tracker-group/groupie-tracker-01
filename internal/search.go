@@ -6,36 +6,36 @@ import "encoding/json"
 import "strconv"
 // run this function befor lunching the server
 func init(){
+	InitializeDataBases()
 	Decoder()
 	FillOutDataForms()
 	FillOutSearchKeys()
 }
 
-type DataBase map[string][]int
-// define a new data base 
-func NewDataBase()*DataBase{
-	var New DataBase
-	return &New
+type DataBase struct { 
+	Base map[string][]int
 }
+
 // add element to the data
 // if the id exist scip
-func (d *DataBase)Add(key string,value int){
-	 for _ , v := range (*d)[key] {
-		if v == value {
-			return
-		}
-	 }
-	(*d)[key] = append((*d)[key], value)
+func (d *DataBase) Add(key string, value int) {
+    values := (*d).Base[key]  // Line 21
+    for _, v := range values { // Line 22
+        if v == value {
+            return
+        }
+    }
+    (*d).Base[key] = append((*d).Base[key], value) // Line 28
 }
 // fetch an element
 func (d *DataBase)Fetch(key string)[]int{
-	return (*d)[key]
+	return (*d).Base[key]
 }
 
 // return all keys in a slice
 func (d *DataBase)Retrieve()[]string{
 	var sl []string
-	for key := range *d {
+	for key := range (*d).Base {
 		sl = append(sl, key)
 	}
 	return sl
@@ -47,6 +47,7 @@ type TemplateData struct{
 }
 
 var Template_data TemplateData
+
 
 func Decoder(){
 	resp , err := http.Get(Urls.ArtistsApi)
@@ -68,10 +69,16 @@ func Decoder(){
 }
 /////////////////////////////////////////////////////
 // put the data into separate data bases
-var By_Name DataBase
-var By_Member DataBase
-var By_First_Album DataBase
-var By_Creation_Date DataBase
+func InitializeDataBases() {
+    By_Name = &DataBase{Base: make(map[string][]int)}
+    By_Member = &DataBase{Base: make(map[string][]int)}
+    By_First_Album = &DataBase{Base: make(map[string][]int)}
+    By_Creation_Date = &DataBase{Base: make(map[string][]int)}
+}
+var By_Name *DataBase
+var By_Member *DataBase
+var By_First_Album *DataBase
+var By_Creation_Date *DataBase
 
 func FillOutDataForms(){
 	for  _,artist := range Template_data.Artists {
