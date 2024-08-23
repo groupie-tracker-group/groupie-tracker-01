@@ -43,8 +43,8 @@
             <input type="text" id="custom-input" placeholder="Search..." />
             <ul id="dropdown" class="dropdown-content">
               {{ range . }}
-              <li class="dropdown-item" data-value="{{ .Name }}">
-                <a href="/Details/?id={{.ID}}">
+              <li class="dropdown-item" data-value="{{ .Test }}">
+                <a href="/Details/?id={{.TestIDs}}">
                   <img src="{{ .Image }}" alt="{{ .Name }}" />
                   {{.Name}}
                 </a>
