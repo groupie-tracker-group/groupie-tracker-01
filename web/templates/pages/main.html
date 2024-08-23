@@ -1,4 +1,25 @@
-{{ define "main"}}
+{{define "main"}}
+<h1> Hellow </h1>
+<div class="container" id="Hero">
+  <div class="hero">
+    <h1>Welcome to Groupie Tracker</h1>
+	<p>Stay connected with bands. Track releases, events, etc.</p> <!-- Completed paragraph-->
+ </div>
 
-<h1 style="background-color:red;">Hello Here </h1>
-{{end}}
+  <div class="cardsBox" id="Albums">
+    {{ range . }}
+    Artist Card -->
+   <div class="card">
+      <img src="{{ .Image }}" alt="{{ .Name }}" class="card-img"> <!-- Completed class name -->
+      <div class="card-content">
+        <h2 class="card-title">{{ .Name }}</h2>
+        <p class="card-info">Creation Date: {{ .CreationDate }}</p> <!-- Completed paragraph -->
+        <p class="card-info">First Album: {{ .FirstAlbum }}</p> <!-- Completed paragraph -->
+        <a href="/Details/?id={{.ID}}"><button>More Details</button></a> <!-- Completed the link and button -->
+      </div>
+    </div>
+    {{ end }} <!-- End of range -->
+  </div>
+</div>
+{{ end }}
+
