@@ -20,6 +20,11 @@ func NewDataBase()*DataBase{
 // add element to the data
 // if the id exist scip
 func (d *DataBase)Add(key string,value int){
+	 for _ , v := range (*d)[key] {
+		if v == value {
+			return
+		}
+	 }
 	(*d)[key] = append((*d)[key], value)
 }
 // fetch an element
