@@ -11,13 +11,6 @@ import (
 	"sync"
 )
 
-// THE ARTIST STRUCT WILL HOLD THE DATA OF THE ARTIST
-// var (
-// 	ArtistApi    = "https://groupietrackers.herokuapp.com/api/artists"
-// 	RelationsApi = "https://groupietrackers.herokuapp.com/api/relation"
-// 	DatesApi     = "https://groupietrackers.herokuapp.com/api/dates"
-// 	LocationsApi = "https://groupietrackers.herokuapp.com/api/locations"
-// )
 
 type artistData struct {
 	ID           int      `json:"id"`
@@ -112,7 +105,7 @@ func HandleArtistsPage(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// execute the template and pass the data to the front end
-	if err = Template.ExecuteTemplate(w, "base", artistsData); err != nil {
+	if err = Template.ExecuteTemplate(w, "base", i.Template_data); err != nil {
     http.Error(w, err.Error(), http.StatusInternalServerError)
     return
 }
