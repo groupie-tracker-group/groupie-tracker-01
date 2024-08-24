@@ -23,14 +23,16 @@
           <div class="custom-datalist">
             <input type="text" id="custom-input" placeholder="Search..." />
             <ul id="dropdown" class="dropdown-content">
-              {{ range . }}
-              <li class="dropdown-item" data-value="{{ .Name}}">
-                <a href="/Details/?id={{.ID}}">
+				<!--//////////////////////////////////////-->
+              {{ range .SearchSlice }}
+			  <li class="dropdown-item" data-value="{{ . }}"></ul>
+               <!-- <a href="/Details/?id={{.ID}}">
                   <img src="{{ .Image }}" alt="{{ .Name }}" />
                   {{.Name}}
                 </a>
-              </li>
+			  </li>-->
               {{ end }}
+			  <!--////////////////////////////////////////////-->
             </ul>
           </div>
           <select name="Key">

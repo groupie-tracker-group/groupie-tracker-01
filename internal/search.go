@@ -19,8 +19,8 @@ type DataBase struct {
 // add element to the data
 // if the id exist scip
 func (d *DataBase) Add(key string, value int) {
-    values := (*d).Base[key]  // Line 21
-    for _, v := range values { // Line 22
+    values := (*d).Base[key]  // 
+    for _, v := range values { // 
         if v == value {
             return
         }
@@ -44,6 +44,7 @@ func (d *DataBase)Retrieve()[]string{
 // get the data fromt the aip
 type TemplateData struct{
 	Artists []ArtistData
+	SearchSlice []string
 }
 
 var Template_data TemplateData
@@ -74,11 +75,13 @@ func InitializeDataBases() {
     By_Member = &DataBase{Base: make(map[string][]int)}
     By_First_Album = &DataBase{Base: make(map[string][]int)}
     By_Creation_Date = &DataBase{Base: make(map[string][]int)}
+	By_Location = &DataBase{Base: make(map[string][]int)}
 }
 var By_Name *DataBase
 var By_Member *DataBase
 var By_First_Album *DataBase
 var By_Creation_Date *DataBase
+var By_Location *DataBase
 
 func FillOutDataForms(){
 	for  _,artist := range Template_data.Artists {
@@ -97,9 +100,8 @@ var All_Search_Keys struct{
 }
 
 func FillOutSearchKeys(){
-	var sl [][]string
-	sl = append(sl , By_Name.Retrieve())
-	sl = append(sl , By_Member.Retrieve())
-	sl = append(sl , By_First_Album.Retrieve())
-	sl = append(sl , By_Creation_Date.Retrieve())
+	Template_data.SearchSlice = append(Template_data.SearchSlice, By_Name.Retrieve()...)
+	Template_data.SearchSlice = append(Template_data.SearchSlice, By_Creation_Date.Retrieve()...)
+	Template_data.SearchSlice = append(Template_data.SearchSlice, By_First_Album.Retrieve()...)
+	Template_data.SearchSlice = append(Template_data.SearchSlice, By_Location.Retrieve()...)
 }
