@@ -1,11 +1,5 @@
 {{define "main"}}
-  <div class="hero">
-    <h1>Welcome to Groupie Tracker</h1>
-	<p>Stay connected with bands. Track releases, events, etc.</p> <!-- Completed paragraph-->
- </div>
-
-  <div class="cardsBox" id="Albums">
-    {{ range . }}
+	{{ range . }}
     <!--Artist Card -->
    <div class="card">
       <img src="{{ .Image }}" alt="{{ .Name }}" class="card-img"> <!-- Completed class name -->
@@ -16,7 +10,6 @@
         <a href="/Details/?id={{.ID}}"><button>More Details</button></a> <!-- Completed the link and button -->
       </div>
     </div>
-    {{ end }} <!-- End of range -->
-  </div>
+	{{ end }}
 {{ end }}
 

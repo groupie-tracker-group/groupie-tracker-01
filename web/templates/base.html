@@ -16,11 +16,18 @@
 </head>
 
 <body>
+
 	 <div class="container" id="Hero">
-	{{template "nav_bar" . }}
+    <div class="hero">
+       <h1>Welcome to Groupie Tracker</h1>
+       <p>Stay connected with bands. Track releases, events, e
+    </div>
+    <div class="cardsBox" id="Albums">
+		{{template "main" . }}
+	</div>
 	 </div>
 
-	{{template "main" . }}
+	{{template "nav_bar" . }}
 	
 
   <footer id="footer">
@@ -60,13 +67,6 @@
         });
       });
 
-      // items.forEach((item) => {
-      //   item.addEventListener("click", () => {
-      //     input.value = item.getAttribute("data-value");
-      //     dropdown.style.display = "none";
-      //   });
-      // });
-
       document.addEventListener("click", (event) => {
         if (!event.target.closest(".custom-datalist")) {
           dropdown.style.display = "none";
@@ -80,5 +80,3 @@
 {{ end }}
 
 
-
-  
