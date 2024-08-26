@@ -38,21 +38,18 @@
         <i class="fi fi-rr-search"></i>
       </label>
       <div class="searchBox">
-        <form>
+        <form action="/search" method="get">
           <div class="custom-datalist">
-            <input type="text" id="custom-input" placeholder="Search..." />
-            <ul id="dropdown" class="dropdown-content">
+            <input type="text" name="text" id="custom-input" placeholder="Search..." />
+            <datalist id="dropdown">
               {{ range . }}
-              <li class="dropdown-item" data-value="{{ .Name }}">
-                <a href="/Details/?id={{.ID}}">
-                  <img src="{{ .Image }}" alt="{{ .Name }}" />
-                  {{.Name}}
-                </a>
-              </li>
+              <option value="{{.Name }}">{{.Image}} <p>{{.Name}}</p>
+              </option>
               {{ end }}
+            </datalist>
             </ul>
           </div>
-          <select name="Key">
+          <select name="category">
             <option value="artist">Artist</option>
             <option value="location">Location</option>
             <option value="date">Date</option>

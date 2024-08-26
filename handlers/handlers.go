@@ -79,7 +79,6 @@ func FetchData(apiEndpoint string, Id string, DataForm interface{}, wg *sync.Wai
 	}
 }
 
-
 // THIS FUNCTION WILL HANDLE THE REQUEST TO THE HOME PAGE
 func HandleArtistsPage(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
@@ -160,4 +159,18 @@ func HandleDetailsPage(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+}
+
+func Search(w http.ResponseWriter, r *http.Request) {
+	//parse form data
+	if r.Method != http.MethodGet {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	//parse form data
+	fmt.Println("test")
+	text := r.FormValue("text")
+	category := r.FormValue("category")
+	fmt.Println(text)
+	fmt.Println(category)
 }

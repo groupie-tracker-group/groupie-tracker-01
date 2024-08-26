@@ -17,6 +17,8 @@ func main() {
 	// Handle requests for "/Details" (assuming it should be "/Details")
 	http.HandleFunc("/Details/", groupie_tracker.HandleDetailsPage)
 
+	// Handle requests for "/Search"
+	http.HandleFunc("/search", groupie_tracker.Search)
 
 	fmt.Printf("Starting server on %s\n", Port)
 	fmt.Println("http://localhost" + Port)
