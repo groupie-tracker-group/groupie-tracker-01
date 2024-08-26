@@ -31,7 +31,7 @@ func Unmarshal() {
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
-		log.Println("Error: status code %d\n", resp.StatusCode)
+		log.Printf("Error: status code %d\n", resp.StatusCode)
 		return
 	}
 	urlData, err := io.ReadAll(resp.Body)
@@ -97,4 +97,3 @@ func FetchData(apiEndpoint string, Id string, DataForm interface{}, wg *sync.Wai
 		return
 	}
 }
-
